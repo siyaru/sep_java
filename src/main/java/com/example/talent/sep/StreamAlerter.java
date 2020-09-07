@@ -1,7 +1,6 @@
 package com.example.talent.sep;
 
 public class StreamAlerter {
-    //private RingBuffer ring;
     private Trie trie;
     private Trie currentNode;
 
@@ -25,12 +24,26 @@ public class StreamAlerter {
     public boolean query(char ch) {
         Trie node = this.currentNode.getValue().get(ch);
         if(node != null){
-            currentNode = node;
-            if(currentNode.getLeaf()){
-                currentNode = this.trie;
-                return true;
+            return moveNode(node);
+        } else {
+            //如果找不到的话，去根节点找
+            Trie rootNode = this.trie.getValue().get(ch);
+            if(rootNode != null){
+                return moveNode(rootNode);
+            }else{
+                this.currentNode = this.trie;
             }
         }
         return false;
+    }
+
+    private boolean moveNode(Trie rootNode) {
+        if(rootNode.getLeaf()){
+            this.currentNode = this.trie;
+            return true;
+        }else{
+            this.currentNode = rootNode;
+            return false;
+        }
     }
 }

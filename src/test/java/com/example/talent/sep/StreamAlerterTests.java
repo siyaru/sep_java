@@ -38,7 +38,7 @@ public class StreamAlerterTests {
         }
         // TODO 按照您的实际情况写运行时间，并在提交时说明这两种情况下耗时情况
         // on my Laptop,
-        // total time is about 25s, Random use 11s, Trie+Ring use 14s
+        // total time is about 19s, Random use 17s749ms, Trie+Ring use 58ms
         assertNotEquals(0, count); // count > 0
     }
 }
